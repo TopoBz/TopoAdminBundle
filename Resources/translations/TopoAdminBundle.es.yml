@@ -1,0 +1,17 @@
+security:
+    login.forgotten_password: ¿Olvidaste tu contraseña?
+
+sidemenu:
+    admin_user.list: Administradores
+
+list.action: ''
+
+admin_user:
+    list:
+        username: Nombre de usuario
+        email: Correo electrónico
+        enabled: Activo
+    label:
+        username: Nombre de usuario
+        email: Correo electrónico
+        enabled: Activo

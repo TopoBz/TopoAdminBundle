@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="topo_admin.menu_listener" class="Topo\AdminBundle\Menu\MenuBuilderListener">
+            <argument type="service" id="security.authorization_checker" />
+            <argument type="service" id="translator" />
+            <tag name="kernel.event_listener" event="sonata.admin.event.configure.menu.sidebar" method="addMenuItems" />
+        </service>
+    </services>
+
+</container>

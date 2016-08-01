@@ -1,0 +1,5 @@
+security:
+    login.forgotten_password: Forgotten password?
+
+sidemenu:
+    admin_user.list: Administrators
