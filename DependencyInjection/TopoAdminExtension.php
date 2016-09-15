@@ -61,7 +61,7 @@ class TopoAdminExtension extends Extension
         $managerType = $container->getParameter('topo_admin.admin_user.manager_type');
 
         $def = new Definition($config['sonata_admin_user_class']);
-        $def->setArguments([null, $adminUserClass, null, 'SonataAdminBundle:CRUD']);
+        $def->setArguments([null, $adminUserClass, $config['sonata_admin_user_controller']]);
         $def->addMethodCall('setTranslationDomain', ['TopoAdminBundle']);
         $def->addTag('sonata.admin', ['manager_type' => $managerType, 'show_in_dashboard' => false]);
 

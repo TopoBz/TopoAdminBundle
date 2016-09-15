@@ -1,3 +1,6 @@
+"Admin User List": Administradores
+"Admin User Create": Nuevo administrador
+
 security:
     login.forgotten_password: ¿Olvidaste tu contraseña?
 

@@ -51,6 +51,7 @@ class Configuration implements ConfigurationInterface
                 // ->scalarNode('admin_user_class')->isRequired()->cannotBeEmpty()->end()
                 // ->scalarNode('model_manager_name')->defaultNull()->end()
                 ->scalarNode('sonata_admin_user_class')->defaultValue('Topo\\AdminBundle\\Admin\\AdminUserAdmin')->cannotBeEmpty()->end()
+                ->scalarNode('sonata_admin_user_controller')->defaultValue('SonataAdminBundle:CRUD')->cannotBeEmpty()->end()
                 ->arrayNode('assets')
                     ->addDefaultsIfNotSet()
                         ->children()

@@ -19,6 +19,10 @@
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
                 {% endblock %}
+                {% block sonata_user_login_notice %}
+                    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+                {% endblock %}
+
                 {{ form_start(form, { 'action': path('topo_admin_security_login_check'), 'attr': { 'class': 'login-form', 'role': 'form' } }) }}
                     {{ form_widget(form) }}
                     <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>

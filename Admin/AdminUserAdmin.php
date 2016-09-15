@@ -2,6 +2,7 @@
 
 namespace Topo\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use FOS\UserBundle\Model\UserInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -12,18 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class AdminUserAdmin extends AbstractAdmin
 {
-    /**
-     * Security access.
-     *
-     * @var array
-     */
-    protected $accessMapping = [
-        'list' => UserInterface::ROLE_SUPER_ADMIN,
-        'create' => UserInterface::ROLE_SUPER_ADMIN,
-        'edit' => UserInterface::ROLE_SUPER_ADMIN,
-        'delete' => UserInterface::ROLE_SUPER_ADMIN,
-    ];
-
     /**
      * {@inheritdoc}
      */
@@ -63,12 +52,26 @@ class AdminUserAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('username', null, ['label' => 'admin_user.list.username'])
+            ->add('email', null, ['label' => 'admin_user.list.email'])
+            ->add('enabled', null, ['label' => 'admin_user.list.enabled']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->add('username', null, ['label' => 'admin_user.list.username'])
             ->add('email', null, ['label' => 'admin_user.list.email'])
-            ->add('enabled', null, ['label' => 'admin_user.list.enabled', 'editable' => true])
+            ->add('enabled', null, [
+                'label' => 'admin_user.list.enabled',
+                'editable' => true,
+            ])
             ->add('_action', null, [
                 'label' => 'list.action',
                 'actions' => ['edit' => [], 'delete' => []],
@@ -86,9 +89,11 @@ class AdminUserAdmin extends AbstractAdmin
         $formMapper
             ->add('username', null, [
                 'label' => 'admin_user.label.username',
+                'translation_domain' => 'TopoAdminBundle',
             ])
             ->add('email', null, [
                 'label' => 'admin_user.label.email',
+                'translation_domain' => 'TopoAdminBundle',
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -97,6 +102,9 @@ class AdminUserAdmin extends AbstractAdmin
                 'invalid_message' => 'fos_user.password.mismatch',
                 'required' => (!$adminUser || null === $adminUser->getId()),
                 'options' => ['translation_domain' => 'FOSUserBundle'],
+            ])
+            ->add('enabled', null, [
+                'label' => 'admin_user.label.enabled',
             ]);
     }
 }

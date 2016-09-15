@@ -63,6 +63,10 @@ class ResettingController extends Controller
         $user->setPasswordRequestedAt(new \DateTime());
         $userManager->updateUser($user);
 
+        $this->addFlash('sonata_flash_info', $this->get('translator')->trans('resetting.check_email', [
+            '%email%' => $user->getEmail(),
+        ], 'FOSUserBundle'));
+
         return $this->redirectToRoute('topo_admin_security_login');
     }
 
@@ -87,7 +91,7 @@ class ResettingController extends Controller
         }
 
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $form = $this->createForm(ResettingType::class);
+        $form = $this->createForm(ResettingType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

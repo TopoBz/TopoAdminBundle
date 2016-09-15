@@ -60,7 +60,7 @@ class MenuBuilderListener
                 'label' => $this->translator->trans('sidemenu.admin_user.list', [], 'TopoAdminBundle'),
                 'route' => 'admin_app_adminuser_list',
                 'attributes' => ['icon' => '<i class="fa fa-users" aria-hidden="true"></i>'],
-            ]);
+            ])->setExtra('routes', array(array('pattern' => '/adminuser/')));
         }
     }
 }
